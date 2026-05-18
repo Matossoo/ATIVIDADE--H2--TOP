@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Gamers</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+            background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+            min-height:100vh;
+            padding:40px 20px;
+        }
+
+        .container{
+            max-width:1300px;
+            margin:auto;
+            background:white;
+            border-radius:20px;
+            padding:40px;
+            box-shadow:0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1{
+            text-align:center;
+            color:#667eea;
+            margin-bottom:10px;
+        }
+
+        .subtitle{
+            text-align:center;
+            color:#666;
+            margin-bottom:35px;
+        }
+
+        .top{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:30px;
+        }
+
+        .btn{
+            padding:12px 20px;
+            border:none;
+            border-radius:8px;
+            text-decoration:none;
+            font-weight:bold;
+            transition:0.3s;
+        }
+
+        .btn-primary{
+            background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+            color:white;
+        }
+
+        .btn-edit{
+            background:#4CAF50;
+            color:white;
+            padding:8px 14px;
+        }
+
+        .btn-delete{
+            background:#f44336;
+            color:white;
+            padding:8px 14px;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+        }
+
+        thead{
+            background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+            color:white;
+        }
+
+        th, td{
+            padding:15px;
+            text-align:left;
+        }
+
+        tbody tr{
+            border-bottom:1px solid #eee;
+        }
+
+        tbody tr:hover{
+            background:#f8f9ff;
+        }
+
+        .actions{
+            display:flex;
+            gap:10px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎮 Sistema Gamer</h1>
+
+    <p class="subtitle">
+        Gerenciamento de usuários gamers
+    </p>
+
+    <div class="top">
+
+        <h2>
+            Lista de Gamers
+        </h2>
+
+        <a th:href="@{/novo}"
+           class="btn btn-primary">
+
+            ➕ Novo Gamer
+
+        </a>
+
+    </div>
+
+    <table>
+
+        <thead>
+
+        <tr>
+
+            <th>ID</th>
+            <th>Nickname</th>
+            <th>Email</th>
+            <th>Nível</th>
+            <th>Jogo Favorito</th>
+            <th>Ações</th>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        <tr th:each="gamer : ${usuarios}">
+
+            <td th:text="${gamer.id}"></td>
+
+            <td th:text="${gamer.nickname}"></td>
+
+            <td th:text="${gamer.email}"></td>
+
+            <td th:text="${gamer.nivel}"></td>
+
+            <td th:text="${gamer.jogoFavorito}"></td>
+
+            <td>
+
+                <div class="actions">
+
+                    <a th:href="@{/editar/{id}(id=${gamer.id})}"
+                       class="btn btn-edit">
+
+                        ✏️ Editar
+
+                    </a>
+
+                    <a th:href="@{/excluir/{id}(id=${gamer.id})}"
+                       class="btn btn-delete"
+                       onclick="return confirm('Deseja excluir este gamer?')">
+
+                        🗑️ Excluir
+
+                    </a>
+
+                </div>
+
+            </td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+</html>
